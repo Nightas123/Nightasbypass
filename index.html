@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Remote App Launcher</title>
+</head>
+<body>
+  <h1>Launch My PC App</h1>
+  <button id="launchBtn">Launch App</button>
+  <p id="status"></p>
+
+  <script>
+    document.getElementById('launchBtn').addEventListener('click', () => {
+      // Replace this URL with your PC's public Ngrok or forwarded URL
+      const url = 'https://YOUR_NGROK_URL/run-app';
+
+      fetch(url)
+        .then(response => {
+          if (!response.ok) throw new Error('Network response was not OK');
+          return response.text();
+        })
+        .then(text => {
+          document.getElementById('status').innerText = `Success: ${text}`;
+        })
+        .catch(err => {
+          document.getElementById('status').innerText = `Error: ${err.message}`;
+        });
+    });
+  </script>
+</body>
+</html>
